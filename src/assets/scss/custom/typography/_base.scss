@@ -1,0 +1,13 @@
+html {
+    @include breakpoint(xlarge up) {
+        p{
+        	font-size: 1.2em !important;
+        }
+    	
+    }
+}
+
+p a {
+	font-weight: bold;
+	border-bottom: 1px solid;
+}
