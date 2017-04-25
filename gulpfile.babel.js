@@ -124,7 +124,8 @@ function images() {
 // Start a server with BrowserSync to preview the site in
 function server(done) {
   browser.init({
-    server: PATHS.dist, port: PORT
+    //server: PATHS.dist, port: PORT
+    proxy: 'http://europraxis.dev'
   });
   done();
 }
