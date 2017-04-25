@@ -17,13 +17,12 @@ UNCSS_OPTIONS:
 
 # Gulp will reference these paths when it copies files
 PATHS:
-  # Path to webserver
-  webserver: "/var/www/apollo"
   # Path to dist folder
-  dist: "dist"  
+  dist: "/var/www/europraxis/public_html/themes/apollo"  
   # Paths to static assets that aren't images, CSS, or JavaScript
   assets:
     - "src/assets/**/*"
+    - "!src/assets/{img,js,scss}"
     - "!src/assets/{img,js,scss}/**/*"
   # Paths to Sass libraries, which can then be loaded with @import
   sass:
@@ -32,8 +31,8 @@ PATHS:
   # Paths to JavaScript libraries, which are combined into one file
   javascript:
     # Libraries required by Foundation
-    #- "bower_components/jquery/dist/jquery.js"
-    #- "bower_components/what-input/dist/what-input.js"
+    - "bower_components/jquery/dist/jquery.js"
+    - "bower_components/what-input/dist/what-input.js"
     # Core Foundation files
     - "bower_components/foundation-sites/js/foundation.core.js"
     - "bower_components/foundation-sites/js/foundation.util.*.js"
@@ -62,7 +61,3 @@ PATHS:
     # Paths to your own project code are here
     - "src/assets/js/!(app).js"
     - "src/assets/js/app.js"
-  libraries:
-    # Libraries required by Foundation  
-    - "bower_components/jquery/dist/jquery.js"
-    - "bower_components/what-input/dist/what-input.js"
