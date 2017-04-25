@@ -61,26 +61,27 @@ $( document ).ready(function() {
 
 
 
-Element.prototype.documentOffsetTop = function () {
-  return this.offsetTop + ( this.offsetParent ? this.offsetParent.documentOffsetTop() : 0 );
-};
+	Element.prototype.documentOffsetTop = function () {
+		return this.offsetTop + ( this.offsetParent ? this.offsetParent.documentOffsetTop() : 0 );
+	};
 
-Element.prototype.scrollIntoViewCenter = function () {
-  window.scrollTo( 0, this.documentOffsetTop() - (window.innerHeight / 2 ) );
-};
-
-
-window.addEventListener("keyup", myScript);
+	Element.prototype.scrollIntoViewCenter = function () {
+		window.scrollTo( 0, this.documentOffsetTop() - (window.innerHeight / 2 ) );
+	};
 
 
-function myScript(e) {
-  if ('9' == e.keyCode) {  // tab = 9
-    //find and vertically center focused input
-    //document.activeElement.scrollIntoViewCenter();
-    document.activeElement.documentOffsetTop();
-    
-  }
-}
+	window.addEventListener("keyup", myScript);
+
+
+	function myScript(e) {
+		if ('9' == e.keyCode) {  // tab = 9
+			//find and vertically center focused input
+			//document.activeElement.scrollIntoViewCenter();
+			//document.activeElement.documentOffsetTop();
+			//alert('tab is pressed A');
+			
+		}
+	}
 
 
 });

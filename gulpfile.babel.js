@@ -4,12 +4,17 @@ import plugins  from 'gulp-load-plugins';
 import yargs    from 'yargs';
 import browser  from 'browser-sync';
 import gulp     from 'gulp';
-import panini   from 'panini';
-import rimraf   from 'rimraf';
+import del      from 'del';
 import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
-var rename = require('gulp-rename');
+
+
+var validate = require('gulp-w3c-css');
+
+var path = require('path');
+var gutil = require('gulp-util');
+
 
 // Load all Gulp plugins into one variable
 const $ = plugins();
@@ -27,7 +32,7 @@ function loadConfig() {
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
-  gulp.series(clean, gulp.parallel(pages, sass, javascript, javascript_libraries, images, copy), styleGuide, copy2weball));
+ gulp.series(clean, gulp.parallel(sass, javascript, images, copy) ));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -35,56 +40,41 @@ gulp.task('default',
 
 // Delete the "dist" folder
 // This happens every time a build starts
-function clean(done) {
-  rimraf(PATHS.dist, done);
+function clean() {
+  return del([
+    PATHS.dist + '/assets/**/*',
+    '!' + PATHS.dist + '/assets/js',
+    '!' + PATHS.dist + '/assets/js/custom',
+    '!' + PATHS.dist + '/assets/js/custom/**/*',
+    '!' + PATHS.dist + '/assets/images',
+    '!' + PATHS.dist + '/assets/images/**/*',
+
+  ], {'force':true});
 }
+
+
+
+/*
+var srcPath = path.join(__dirname, './css/*.css');
+
+gulp.src(srcPath)
+  .pipe(validate())
+  .pipe(gutil.buffer(function(err, files) {
+    // err - an error encountered
+    // files - array of validation results
+    // files[i].contents is empty if there are no errors or warnings found
+  }));*/
+
+
+
+
+
 
 // Copy files out of the assets folder
 // This task skips over the "img", "js", and "scss" folders, which are parsed separately
 function copy() {
   return gulp.src(PATHS.assets)
     .pipe(gulp.dest(PATHS.dist + '/assets'));
-}
-
-function copy2web() {
-  //return gulp.src(PATHS.dist + '/assets/**/*')
-  //.pipe(gulp.dest(PATHS.webserver + '/assets'))
-  return gulp.src(PATHS.dist + '/assets/css/*')
-  .pipe(gulp.dest(PATHS.webserver + '/assets/css'))
-  .pipe(browser.reload({ stream: true }));
-}
-
-function copy2weball() {
-  return gulp.src(PATHS.dist + '/assets/**/*')
-  .pipe(gulp.dest(PATHS.webserver + '/assets'))
-  .pipe(browser.reload({ stream: true }));
-}
-
-// Copy page templates into finished HTML files
-function pages() {
-  return gulp.src('src/pages/**/*.{html,hbs,handlebars}')
-    .pipe(panini({
-      root: 'src/pages/',
-      layouts: 'src/layouts/',
-      partials: 'src/partials/',
-      data: 'src/data/',
-      helpers: 'src/helpers/'
-    }))
-    .pipe(gulp.dest(PATHS.dist));
-}
-
-// Load updated HTML templates and partials into Panini
-function resetPages(done) {
-  panini.refresh();
-  done();
-}
-
-// Generate a style guide from the Markdown content and HTML template in styleguide/
-function styleGuide(done) {
-  sherpa('src/styleguide/index.md', {
-    output: PATHS.dist + '/styleguide.html',
-    template: 'src/styleguide/template.html'
-  }, done);
 }
 
 // Compile Sass into CSS
@@ -103,11 +93,10 @@ function sass() {
     //.pipe($.if(PRODUCTION, $.uncss(UNCSS_OPTIONS)))
     .pipe($.if(PRODUCTION, $.cssnano()))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe($.if(PRODUCTION, rename( { suffix: ".min" })))
-    .pipe(gulp.dest(PATHS.dist + '/assets/css'));
-    //.pipe(browser.reload({ stream: true }));
+    .pipe(gulp.dest(PATHS.dist + '/assets/css'))
+    .pipe(browser.reload({ stream: true }));
 }
-
+ 
 // Combine JavaScript into one file
 // In production, the file is minified
 function javascript() {
@@ -119,23 +108,7 @@ function javascript() {
       .on('error', e => { console.log(e); })
     ))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe($.if(PRODUCTION, rename( function(fullname){ fullname.extname = ".min.js"; } )))
     .pipe(gulp.dest(PATHS.dist + '/assets/js'));
-}
-
-// Combine JavaScript libraries into one file
-// In production, the file is minified
-function javascript_libraries() {
-  return gulp.src(PATHS.libraries)
-    .pipe($.sourcemaps.init())
-    .pipe($.concat('libraries.js'))
-    .pipe($.if(PRODUCTION, $.uglify()
-      .on('error', e => { console.log(e); })
-    ))
-    .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
-    .pipe($.if(PRODUCTION, rename( function(fullname){ fullname.extname = ".min.js"; } )))
-    .pipe(gulp.dest(PATHS.dist + '/assets/js'));
-  ;  
 }
 
 // Copy images to the "dist" folder
@@ -151,8 +124,7 @@ function images() {
 // Start a server with BrowserSync to preview the site in
 function server(done) {
   browser.init({
-    //server: PATHS.dist, port: PORT
-    proxy: 'localhost/apollo'
+    server: PATHS.dist, port: PORT
   });
   done();
 }
@@ -166,11 +138,7 @@ function reload(done) {
 // Watch for changes to static assets, pages, Sass, and JavaScript
 function watch() {
   gulp.watch(PATHS.assets, copy);
-  gulp.watch(PATHS.sass).on('all', gulp.series(sass, copy2web));
-  gulp.watch('src/pages/**/*.html').on('all', gulp.series(pages, browser.reload));
-  gulp.watch('src/{layouts,partials}/**/*.html').on('all', gulp.series(resetPages, pages, browser.reload));
-  gulp.watch('src/assets/scss/**/*.scss').on('all', gulp.series(sass, copy2web));
-  gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, javascript_libraries, browser.reload));
+  gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
+  gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, browser.reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));
-  gulp.watch('src/styleguide/**').on('all', gulp.series(styleGuide, browser.reload));
 }
