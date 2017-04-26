@@ -1,22 +1,24 @@
 
 $header-bg: #074E68;
 $subnav-link-padding: 0.9rem;
-$subnav-font-size: 0.85rem;
+$subnav-font-size: 1rem;
 $subnav-link-opacity: 0.15;
-$header-height: 2.5rem;
+$header-height: 1.0rem;
 $transition: all .35s ease-in-out;
 
 .header {
   text-align: center;
   background: $header-bg;
   background-size: cover;
+  background-color: $header-bg;
+  background-image: url('../img/rich-media-bg.jpg');
   position: relative;
   overflow: visible;
   padding-top: $header-height;
   padding-bottom: $header-height + ($subnav-link-padding * 2 + $subnav-font-size - 0.15rem);
   
   .headline {
-    color: #ffe;
+    color: $white;
   }
 }
 
@@ -36,7 +38,7 @@ $transition: all .35s ease-in-out;
       padding: $subnav-link-padding 1rem;
       font-size: $subnav-font-size;
       color: #ffe;
-      text-transform: uppercase;
+      text-transform: none;
       display: block;
       font-weight: bold;
       letter-spacing: 1px;
