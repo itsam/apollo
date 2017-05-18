@@ -1,0 +1,82 @@
+body, html {
+    height: 100%;
+}
+
+
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  //opacity: 0.55;
+  opacity: 0.8;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("../img/apple-1771905_1280.jpg");
+  min-height: 40em;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  //top: calc(50% - 2.5em);
+  top: 3.5em;;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.moto {
+  position: absolute;
+  left: 0;
+  top: 15em;
+  width: 100%;
+  background-color:white;
+  font-weight: bold; 
+  padding: 1.5em 0;
+  text-align: justify;
+
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 2.5em;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-attachment: scroll;
+    }
+
+}
+
+@media only screen and (max-device-width: 767px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+        background-image: none;
+    }
+
+    .caption {
+      top: 1.5em;
+    }
+    .caption span.border {
+      font-size: 1.5em;
+    }
+    .moto {
+      top: 6em;
+      text-align: center;
+    }
+}

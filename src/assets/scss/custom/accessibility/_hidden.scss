@@ -2,8 +2,8 @@
 /* Skip to links */
 a {
   &.skip-to {
-	background-color: #bd3741;
-	color: #fff;
+	background-color: $skip-background;
+	color: $skip-font-color;
 	display: inline-block;
 	padding: 0.5em;
 	z-index: 10002;

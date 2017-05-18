@@ -3,6 +3,7 @@
 //
 //  Table of Contents:
 //
+//   0. Custom and Accessibility 
 //   1. Global
 //   2. Breakpoints
 //   3. The Grid
@@ -42,6 +43,11 @@
 //  37. Top Bar
 
 @import 'util/util';
+
+// 0. Custom and Accessibility
+// ---------
+$skip-font-color: #ffffff;
+$skip-background: #bd3741;
 
 // 1. Global
 // ---------
