@@ -1,9 +1,7 @@
-
-//$header-bg: #666464;
-//$header-bg: #d8d6d6;
 $header-bg: $white;
 $header-li: #282E34;
-$header-border: #7C7C7C;
+$header-li-active: #605f5f;// #a7b4ce;
+$header-border: #FFD036;// #7C7C7C;
 $subnav-link-padding: 0.9rem;
 $subnav-font-size: 1rem;
 $subnav-link-opacity: 0.15;
@@ -26,6 +24,11 @@ $transition: all .35s ease-in-out;
   .headline {
     color: $white;
   }
+
+  .menu {
+    margin: 50px 0;
+  }
+
 }
 
 .header-subnav {
@@ -51,26 +54,106 @@ $transition: all .35s ease-in-out;
       transition: $transition;
       
       &.is-active {
-        background: rgba(250,250,250,$subnav-link-opacity);
+        //background: rgba(250,250,250,$subnav-link-opacity);
+        background-color: $header-li-active;
+        color: $white;
       }
 
       &:hover {
-        background: rgba(250,250,250,$subnav-link-opacity);
+        //background: rgba(250,250,250,$subnav-link-opacity);
+        background-color: $header-li-active;
+        color: $white;
         transition: $transition;
       }
     }
   }
 }
 
-.menu {
-  margin: 50px 0;
-}
+/* landing page moto */
 
 .landing {
-    background-image: url("../img/apple-1771905_1280.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100% !important;
-    z-index: 0;
-    height: 50em;
+  opacity: 1.0;
+  background-image: url("../img/bg.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  @include breakpoint(medium down) {
+     background-attachment: scroll;
+    
+  }
+  @include breakpoint(small down) {
+     background-image: none;
+    
+  }
 }
+
+.caption {
+  margin: 5em 0;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  @include breakpoint(small down) {
+    margin-bottom: 1em;
+  }
+
+
+  span.border {
+    background-color: #111;
+    color: #fff;
+    padding: 18px;
+    font-size: 2.5em;
+    letter-spacing: 10px;
+    @include breakpoint(medium down) {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.moto {
+  background-color:rgba(255, 255, 255, 0.9);
+  //background-color:transparent;
+  font-weight: bold; 
+  margin: 5em 0 10em 0;
+  padding: 3.0em;
+  //text-align: justify;
+  img {
+    max-width: 200px;
+  }
+
+  @include breakpoint(medium down) {
+    margin: 0;
+    text-align: center;
+  }
+
+}
+
+
+/* Turn off parallax scrolling for tablets and phones */
+/*
+@media only screen and (max-device-width: 1024px) {
+    .landing {
+        background-attachment: scroll;
+    }
+
+}
+
+@media only screen and (max-device-width: 767px) {
+    .landing {
+        background-image: none;
+        //min-height: 30em;
+    }
+
+    .caption {
+      top: 1.5em;
+    }
+    .caption span.border {
+      font-size: 1.5em;
+    }
+    .moto {
+      top: 6em;
+      text-align: center;
+    }
+}
+*/

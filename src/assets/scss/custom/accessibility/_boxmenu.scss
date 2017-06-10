@@ -43,7 +43,8 @@ $transition: all .35s ease-in-out;
       transition: $transition;
       
       &.is-active {
-        background: rgba(250,250,250,$subnav-link-opacity);
+        //background: rgba(250,250,250,$subnav-link-opacity); 
+        background-color: $header-bg;
       }
 
       &:hover {
