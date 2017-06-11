@@ -1,3 +1,38 @@
+$logo-based-primary: #6C8AC6;
+
 body, html {
+    height: 100%;
+}
+
+section#layout-content {
+  padding: 2em 0;
+  h2 {
+    color: $logo-based-primary;
+  }
+  
+  #maindoc {
+    h2 {
+      position: relative;
+      margin-left: 25px;
+      //color: map-get($foundation-palette, 'primary');// #1779ba;
+    }
+    h2:not(:first-child) {
+      margin-top: 1em;
+    }
+  }
+}
+
+.docs-toc .active {
+  background-color: map-get($foundation-palette, 'primary');
+  color: $white;
+}
+
+a.heading-hash {
+    background: 0 0;
+    padding: 0;
+    position: absolute;
+    left: -25px;
+    top: 0;
+    width: 100%;
     height: 100%;
 }

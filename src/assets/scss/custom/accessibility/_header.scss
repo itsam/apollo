@@ -31,6 +31,10 @@ $transition: all .35s ease-in-out;
 
 }
 
+ul#off-canvas-menu{
+  margin-top: 3em;
+}
+
 .header-subnav {
   float: none;
   position: absolute;
@@ -43,6 +47,26 @@ $transition: all .35s ease-in-out;
     //float: none;
     display: inline-block;
 
+      &.active {
+        //background: rgba(250,250,250,$subnav-link-opacity);
+        background-color: $header-li-active;
+      }
+
+      &.active > a {
+        color: $white;
+      }
+
+      &:hover {
+        //background: rgba(250,250,250,$subnav-link-opacity);
+        background-color: $header-li-active;
+        transition: $transition;
+      }
+
+      &:hover > a{
+        color: $white;
+        transition: $transition;
+      }
+
     a {
       padding: $subnav-link-padding 1rem;
       font-size: $subnav-font-size;
@@ -53,18 +77,8 @@ $transition: all .35s ease-in-out;
       letter-spacing: 1px;
       transition: $transition;
       
-      &.is-active {
-        //background: rgba(250,250,250,$subnav-link-opacity);
-        background-color: $header-li-active;
-        color: $white;
-      }
 
-      &:hover {
-        //background: rgba(250,250,250,$subnav-link-opacity);
-        background-color: $header-li-active;
-        color: $white;
-        transition: $transition;
-      }
+
     }
   }
 }

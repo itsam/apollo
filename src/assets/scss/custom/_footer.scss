@@ -3,11 +3,16 @@ $font-size-footer-bottom: 0.75em;
 
 .marketing-site-footer {
   background: $marketing-site-footer-bg;
-  color: lighten($marketing-site-footer-bg, 40%);
+  //color: lighten($marketing-site-footer-bg, 40%);
+  color: $white;
   padding: 2rem 0 0;
   font-size: $font-size-footer-bottom;
 
   .marketing-site-footer-menu-social a {
+    color: $white;
+  }
+
+  a {
     color: $white;
   }
 
@@ -44,7 +49,7 @@ $font-size-footer-bottom: 0.75em;
 
   .fa {
     font-size: 2rem;
-    color: darken($marketing-site-footer-bg, 20%);
+    color: darken($marketing-site-footer-bg, 40%);
   }
 
   p {
