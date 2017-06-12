@@ -70,10 +70,23 @@ $font-size-footer-bottom: 0.8em;
   background: darken($marketing-site-footer-bg, 20%);
   padding: 1rem 0;
   
-
   p,
   .menu {
     margin-bottom: 0;
+  }
+
+  .language{
+    text-align: right;
+    @include breakpoint(small down) {  
+      text-align: center;
+    }
+  }
+
+  .copyright{
+    text-align: left;
+    @include breakpoint(small down) {  
+      text-align: center;
+    }
   }
 
   .marketing-site-footer-bottom-links {
