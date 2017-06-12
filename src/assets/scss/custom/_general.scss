@@ -5,7 +5,7 @@ body, html {
 }
 
 section#layout-content {
-  padding: 2em 0;
+  padding: 2em 0 25em 0;
   h2 {
     color: $logo-based-primary;
   }
@@ -19,6 +19,20 @@ section#layout-content {
     h2:not(:first-child) {
       margin-top: 1em;
     }
+    ul li {
+      padding-bottom: 1.0em;
+    }
+  }
+
+  #sidebar {
+    .menu li a {
+      line-height: 1.2em;
+    }
+  }
+
+  @include breakpoint(medium down) {
+    padding: 2em 0;
+    
   }
 }
 

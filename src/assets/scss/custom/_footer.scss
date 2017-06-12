@@ -24,6 +24,14 @@ $font-size-footer-bottom: 0.75em;
     margin-bottom: 1rem;
   }
 
+  ul li {
+    padding-bottom: 1em;
+  }
+
+  ul li a:hover {
+    text-decoration: underline;
+  }
+
   @include breakpoint(small only) {
     .columns {
       margin-bottom: 2rem;
@@ -66,6 +74,10 @@ $font-size-footer-bottom: 0.75em;
   p,
   .menu {
     margin-bottom: 0;
+  }
+
+  p {
+    padding: 0.2em;
   }
 
   .marketing-site-footer-bottom-links {
