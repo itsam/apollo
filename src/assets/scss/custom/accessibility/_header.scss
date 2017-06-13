@@ -8,6 +8,17 @@ $subnav-link-opacity: 0.15;
 $header-height: 1.0rem;
 $transition: all .35s ease-in-out;
 
+.topbar {
+  background-color: $black; //map-get($foundation-palette, 'secondary');
+  .menu {
+    float: right;
+    li a {
+      color: $white;
+      font-size: 0.75em;
+    }
+  }
+}
+
 .header {
   text-align: center;
   background: $header-bg;
@@ -132,6 +143,7 @@ ul#off-canvas-menu{
   margin: 5em 0 10em 0;
   padding: 3.0em;
   //text-align: justify;
+  //signature...
   img {
     max-width: 200px;
   }
