@@ -8,11 +8,6 @@ body {
   background-color: map-get($foundation-palette, 'secondary');
 }
 
-:focus {
-  outline: 2px dotted red; // $skip-background;
-  outline-offset:-2px;
-}
-
 .off-canvas-wrapper {
   background-color: $white;
 }
@@ -75,6 +70,6 @@ a.heading-hash {
   }  
 }
 
-.contact-details {
+.short {
   padding: 2em 0;
 }

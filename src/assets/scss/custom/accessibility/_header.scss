@@ -10,6 +10,7 @@ $transition: all .35s ease-in-out;
 
 .topbar {
   background-color: $black; //map-get($foundation-palette, 'secondary');
+  border-bottom: 1px solid $black;
   .menu {
     float: right;
     li a {
