@@ -33,6 +33,11 @@ section#layout-content {
     h2:not(:first-child) {
       margin-top: 1em;
     }
+    h2:target {
+      border-bottom: 3px solid $link-color;
+      font-weight: bold;
+    }
+
     ul li {
       padding-bottom: 1.0em;
     }
