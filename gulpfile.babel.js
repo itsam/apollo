@@ -9,11 +9,29 @@ import sherpa   from 'style-sherpa';
 import yaml     from 'js-yaml';
 import fs       from 'fs';
 
-
 var validate = require('gulp-w3c-css');
 
 var path = require('path');
 var gutil = require('gulp-util');
+
+var uncss = require('gulp-uncss');
+
+gulp.task('uncss', function () {
+    return gulp.src('/var/www/europraxis/public_html/themes/apollo/assets/css/app.css')
+        .pipe(uncss({
+            html: [
+              'http://europraxis.dev/',
+              'http://europraxis.dev/el/services',
+              'http://europraxis.dev/el/experience',
+              'http://europraxis.dev/el/clients',
+              'http://europraxis.dev/el/contact',
+              'http://europraxis.dev/el/accessibility',
+              'http://europraxis.dev/el/financials'
+            ]
+        }))
+        .pipe(gulp.dest('/home/itsam/devel/validation_results/out'));
+});
+
 
 
 // Load all Gulp plugins into one variable
@@ -38,6 +56,9 @@ gulp.task('build',
 gulp.task('default',
   gulp.series('build', server, watch));
 
+gulp.task('validate',
+  gulp.series(validation));
+
 // Delete the "dist" folder
 // This happens every time a build starts
 function clean() {
@@ -54,17 +75,14 @@ function clean() {
 
 
 
-/*
-var srcPath = path.join(__dirname, './css/*.css');
 
-gulp.src(srcPath)
+//var srcPath = path.join(__dirname, './css/*.css');
+function validation() {
+return gulp.src('/var/www/europraxis/public_html/themes/apollo/assets/css/app.css')
   .pipe(validate())
-  .pipe(gutil.buffer(function(err, files) {
-    // err - an error encountered
-    // files - array of validation results
-    // files[i].contents is empty if there are no errors or warnings found
-  }));*/
+  .pipe(gulp.dest('/home/itsam/devel/validation_results'));
 
+}
 
 
 
