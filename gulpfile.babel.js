@@ -14,8 +14,8 @@ var validate = require('gulp-w3c-css');
 var path = require('path');
 var gutil = require('gulp-util');
 
+//uncss
 var uncss = require('gulp-uncss');
-
 gulp.task('uncss', function () {
     return gulp.src('/var/www/europraxis/public_html/themes/apollo/assets/css/app.css')
         .pipe(uncss({
@@ -27,9 +27,25 @@ gulp.task('uncss', function () {
               'http://europraxis.dev/el/contact',
               'http://europraxis.dev/el/accessibility',
               'http://europraxis.dev/el/financials'
+            ],
+            ignore: [
+              new RegExp('^meta\..*'),
+              new RegExp('^\.is-.*')
             ]
         }))
         .pipe(gulp.dest('/home/itsam/devel/validation_results/out'));
+});
+
+//critical
+var critical = require('critical').stream;
+
+// Generate & Inline Critical-path CSS
+gulp.task('critical', function () {
+    return gulp.src('/home/itsam/devel/sample_pages/*.html')
+        .pipe(critical({base: '/home/itsam/devel/sample_pages', inline: true, minify: true, css: ['/var/www/europraxis/public_html/themes/apollo/assets/css/app.css']}))
+        .on('error', function(err) { gutil.log(gutil.colors.red(err.message)); })
+        .pipe(gulp.dest('/home/itsam/devel/sample_pages/out'));
+        
 });
 
 

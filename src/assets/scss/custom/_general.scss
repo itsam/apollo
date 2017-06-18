@@ -20,20 +20,25 @@ body {
 }
 
 section#layout-content {
-  h2 {
+  h3 {
     color: $logo-based-primary;
   }
   
   #maindoc {
-    h2 {
+    h2, h3 {
       position: relative;
       margin-left: 25px;
       //color: map-get($foundation-palette, 'primary');// #1779ba;
     }
-    h2:not(:first-child) {
-      margin-top: 1em;
+
+    //h2:not(:first-child) {
+    //  margin-top: 1em;
+    //}
+
+    h2:target{
+      border-bottom: 3px solid $black;
     }
-    h2:target {
+    h3:target {
       border-bottom: 3px solid $link-color;
       font-weight: bold;
     }
