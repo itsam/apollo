@@ -71,7 +71,7 @@ $footer-separator: #e3e3e5;
   background-color: map-get($foundation-palette, 'secondary');//darken($marketing-site-footer-bg, 20%);
   padding: 1rem 0;
   a {
-    color: $black; //map-get($foundation-palette, 'primary');
+    color: map-get($foundation-palette, 'primary');
   }
   
   p,

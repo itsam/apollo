@@ -17,16 +17,11 @@ var gutil = require('gulp-util');
 //uncss
 var uncss = require('gulp-uncss');
 gulp.task('uncss', function () {
-    return gulp.src('/var/www/europraxis/public_html/themes/apollo/assets/css/app.css')
+    return gulp.src('/srv/http/epamea-site/public_html/themes/apollo/assets/css/app.css')
         .pipe(uncss({
             html: [
-              'http://europraxis.dev/',
-              'http://europraxis.dev/el/services',
-              'http://europraxis.dev/el/experience',
-              'http://europraxis.dev/el/clients',
-              'http://europraxis.dev/el/contact',
-              'http://europraxis.dev/el/accessibility',
-              'http://europraxis.dev/el/financials'
+              'http://epamea.local/',
+              'http://epamea.local/el/financials'
             ],
             ignore: [
               new RegExp('^meta\..*'),
@@ -66,7 +61,7 @@ function loadConfig() {
 
 // Build the "dist" folder by running all of the below tasks
 gulp.task('build',
- gulp.series(clean, gulp.parallel(sass, javascript, images, copy) ));
+ gulp.series(clean, gulp.parallel(sass, javascript, images), copy ));
 
 // Build the site, run the server, and watch for file changes
 gulp.task('default',
@@ -94,7 +89,7 @@ function clean() {
 
 //var srcPath = path.join(__dirname, './css/*.css');
 function validation() {
-return gulp.src('/var/www/europraxis/public_html/themes/apollo/assets/css/app.css')
+return gulp.src('/srv/http/epamea-site/public_html/themes/apollo/assets/css/app.css')
   .pipe(validate())
   .pipe(gulp.dest('/home/itsam/devel/validation_results'));
 
@@ -159,7 +154,7 @@ function images() {
 function server(done) {
   browser.init({
     //server: PATHS.dist, port: PORT
-    proxy: 'http://europraxis.dev'
+    proxy: 'http://epamea.local'
   });
   done();
 }
@@ -173,6 +168,7 @@ function reload(done) {
 // Watch for changes to static assets, pages, Sass, and JavaScript
 function watch(done) {
   gulp.watch(PATHS.assets, copy);
+  gulp.watch(PATHS.site, reload);
   gulp.watch('src/assets/scss/**/*.scss').on('all', sass);
   gulp.watch('src/assets/js/**/*.js').on('all', gulp.series(javascript, browser.reload));
   gulp.watch('src/assets/img/**/*').on('all', gulp.series(images, browser.reload));

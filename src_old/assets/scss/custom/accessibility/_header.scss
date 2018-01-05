@@ -3,8 +3,8 @@ $header-li: $white; //#282E34;
 $header-li-active: $black; //#605f5f;// #a7b4ce;
 $header-topbar: #BFBFC2;
 $header-border: #FFD036;// #7C7C7C;
-$subnav-link-padding: 0.2rem;
-$subnav-font-size: 1.3rem;
+$subnav-link-padding: 0.5rem;
+$subnav-font-size: 1rem;
 $subnav-link-opacity: 0.15;
 $header-height: 1.0rem;
 //$transition: all .35s ease-in-out;
@@ -32,26 +32,6 @@ $mainmenu-bg: #0058B7;
 
     }
   } 
-
-  &.topbar-logged-user{
-    background-color: #79a9e0;
-    .menu {
-      float: right;
-      li {
-        > a {
-          color: $black;
-          //font-size: 0.75em;
-        }
-  
-        &.active > a {
-          color: $white;
-        }
-  
-      }
-    } 
-      
-  }
-
 }
 
 #logo {
@@ -151,7 +131,7 @@ ul#off-canvas-menu{
       color: $header-li;
       text-transform: none;
       display: block;
-      //font-weight: bold;
+      font-weight: bold;
       letter-spacing: 1px;
       transition: $transition;
       

@@ -35,8 +35,7 @@ section#layout-content {
   padding: 0 1.5em;
   
   h3 {
-    color: $black; //$logo-based-primary;
-    margin-top: 0.5em;
+    color: $logo-based-primary;
   }
 
   #maindoc {
@@ -110,26 +109,4 @@ $progressbar-bg: #354B9E;
   background-color: $progressbar-bg;
   font-size: 0.8rem;
   font-weight: bold;
-}
-
-
-
-/* login user */
-.login-area-name {
-  color: red;
-  margin: 0.5em 0 0 1em;
-  font-size: 1.2em;
-}
-
-.notification {
-  font-weight: bold;
-  font-size: 1.3em;
-}
-
-.my-area {
-  background-color: red;
-}
-
-span.field-validation.visible {
-  color: red;
 }
